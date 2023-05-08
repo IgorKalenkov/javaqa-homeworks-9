@@ -1,7 +1,37 @@
 package ru.netology.radio;
+
 public class Radio {
-    private int currentRadioStation;
-    private int audioVolume;
+    private int quantityRadioStation = 10;
+    private int minRadioStation = 0;
+    private int maxRadioStation = quantityRadioStation - 1;
+    private int currentRadioStation = minRadioStation;
+    private int maxAudio = 100;
+    private int minAudio = 0;
+    private int audioVolume = minAudio;
+
+    public Radio(int quantityRadioStation) { // конструктор кол-во станций
+        if (quantityRadioStation < minRadioStation) {
+            return;
+        } else {
+            this.quantityRadioStation = quantityRadioStation;
+        }
+        this.maxRadioStation = quantityRadioStation - 1;
+    }
+
+    public Radio() {
+    }
+
+    public int getMinRadioStation() {
+        return minRadioStation;
+    }
+
+    public int getMaxAudio() {
+        return maxAudio;
+    }
+
+    public int getMinAudio() {
+        return minAudio;
+    }
 
     public int getCurrentRadioStation() {
         return currentRadioStation;
@@ -12,49 +42,49 @@ public class Radio {
     }
 
     public void setCurrentRadioStation(int newCurrentRadioStation) { // устанавливает значения радиостанции от 0 до 9
-        if (newCurrentRadioStation < 0) {
+        if (newCurrentRadioStation < minRadioStation) {
             return;
         }
-        if (newCurrentRadioStation > 9) {
+        if (newCurrentRadioStation > maxRadioStation) {
             return;
         }
         currentRadioStation = newCurrentRadioStation;
     }
 
     public void nextCurrentRadioStation() { // переключает радиостанцию вверх
-        if (currentRadioStation == 9) {
-            setCurrentRadioStation(0);
+        if (currentRadioStation == maxRadioStation) {
+            setCurrentRadioStation(minRadioStation);
         } else {
-                currentRadioStation++;
-            }
+            currentRadioStation++;
+        }
     }
 
     public void prevCurrentRadioStation() { // переключает радиостанцию вниз
-        if (currentRadioStation == 0) {
-            setCurrentRadioStation(9);
+        if (currentRadioStation == minRadioStation) {
+            setCurrentRadioStation(maxRadioStation);
         } else {
-                currentRadioStation--;
-            }
+            currentRadioStation--;
+        }
     }
 
     public void setAudioVolume(int newAudioVolume) { // устанавливает значение звука от 0 до 100
-        if (newAudioVolume < 0) {
+        if (newAudioVolume < minAudio) {
             return;
         }
-        if (newAudioVolume > 100) {
+        if (newAudioVolume > maxAudio) {
             return;
         }
         audioVolume = newAudioVolume;
     }
 
     public void increaseAudioVolume() { // увеличивает звук
-        if (audioVolume < 100) {
+        if (audioVolume < maxAudio) {
             audioVolume++;
         }
     }
 
     public void decreaseAudioVolume() { // уменьшает звук
-        if (audioVolume > 0) {
+        if (audioVolume > minAudio) {
             audioVolume--;
         }
     }
